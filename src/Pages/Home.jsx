@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import temp from "../assets/temp.png";
 import toast, { Toaster } from "react-hot-toast";
-import { FaCopy, FaDownload, FaRecycle } from "react-icons/fa";
+import { FaCopy, FaDownload, FaRecycle, FaUpload } from "react-icons/fa";
 
 const createImage = (url) =>
   new Promise((resolve, reject) => {
@@ -93,7 +93,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-700 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-700 flex items-center justify-center px-1 py-6">
       <canvas ref={canvasRef} className="hidden" />
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -115,7 +115,7 @@ const Home = () => {
                     PNG, JPG or JPEG (Max 10MB)
                   </p>
                   <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-                    <span className="text-emerald-600 text-3xl">↑</span>
+                    <span className="text-emerald-600 text-3xl"><FaUpload/></span>
                   </div>
                 
                 </div>
