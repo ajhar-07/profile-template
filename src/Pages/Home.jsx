@@ -110,13 +110,14 @@ const Home = () => {
 
               {!imageSrc && (
                 <div className="flex flex-col items-center justify-center h-full text-center">
+                    <p className="font-medium">আপনার ছবি আপলোড করুন</p>
+                  <p className="text-sm text-gray-500 mb-2">
+                    PNG, JPG or JPEG (Max 10MB)
+                  </p>
                   <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
                     <span className="text-emerald-600 text-3xl">↑</span>
                   </div>
-                  <p className="font-medium">আপনার ছবি আপলোড করুন</p>
-                  <p className="text-sm text-gray-500">
-                    PNG, JPG or JPEG (Max 10MB)
-                  </p>
+                
                 </div>
               )}
 
