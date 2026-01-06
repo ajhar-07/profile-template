@@ -3,14 +3,9 @@ import Cropper from "react-easy-crop";
 import { motion } from "framer-motion";
 import temp from "../assets/temp.png";
 import toast, { Toaster } from "react-hot-toast";
-import {
-  FaCopy,
-  FaDownload,
-  FaRecycle,
-  FaUpload,
-} from "react-icons/fa";
+import { FaCopy, FaDownload, FaRecycle, FaUpload } from "react-icons/fa";
 
-/* ------------------ Helpers ------------------ */
+/* ---------- Helpers ---------- */
 const createImage = (url) =>
   new Promise((resolve, reject) => {
     const img = new Image();
@@ -42,7 +37,7 @@ const getCroppedImage = async (imageSrc, cropPixels) => {
   return canvas.toDataURL("image/png");
 };
 
-/* ------------------ Animations ------------------ */
+/* ---------- Animations ---------- */
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
@@ -53,7 +48,7 @@ const fadeIn = {
   visible: { opacity: 1 },
 };
 
-/* ------------------ Component ------------------ */
+/* ---------- Component ---------- */
 const Home = () => {
   const hashtagText = "#selimuddinforsylhet6 চ্যালেঞ্জে অংশ নিন ...";
 
@@ -114,9 +109,9 @@ const Home = () => {
 
   return (
     <motion.div
-      variants={fadeIn}
       initial="hidden"
       animate="visible"
+      variants={fadeIn}
       transition={{ duration: 0.6 }}
       className="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-700 flex items-center justify-center px-1 py-6"
     >
@@ -147,9 +142,10 @@ const Home = () => {
                   <p className="text-sm text-gray-500 mb-2">
                     PNG, JPG or JPEG (Max 10MB)
                   </p>
+
                   <motion.div
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.4 }}
                     className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center"
                   >
                     <FaUpload className="text-emerald-600 text-3xl" />
@@ -233,10 +229,7 @@ const Home = () => {
               transition={{ duration: 0.4 }}
               className="flex gap-3"
             >
-              <button
-                onClick={() => fileRef.current.click()}
-                className="flex-1 flex items-center justify-around bg-gray-200 rounded-xl py-2 font-medium"
-              >
+              <button className="flex-1 flex items-center justify-around bg-gray-200 rounded-xl py-2 font-medium">
                 <FaRecycle /> ফটো পরিবর্তন করুন
               </button>
               <button
@@ -248,7 +241,7 @@ const Home = () => {
             </motion.div>
           )}
 
-          {/* Hashtag */}
+          {/* Hashtag Card */}
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -257,6 +250,10 @@ const Home = () => {
             <h3 className="text-lg font-bold text-gray-800 mb-2">
               এলাকার উন্নয়নের অংশ হোন
             </h3>
+            <p className="text-sm text-gray-600 mb-4">
+              বিয়ানীবাজার ও গোলাপগঞ্জের তরুণদের জন্য এটি একটি বিশেষ সুযোগ।
+            </p>
+
             <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
               <span className="text-emerald-500 font-bold">#</span>
               <span className="text-emerald-600 text-sm font-medium truncate">
@@ -279,22 +276,30 @@ const Home = () => {
         {/* RIGHT SIDE */}
         <motion.div
           variants={fadeUp}
-          initial="hidden"
-          animate="visible"
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-white order-1 lg:order-2"
         >
           <h1 className="text-3xl font-bold mb-3">আদম্য তরুণ প্রতিনিধি</h1>
-          <p className="text-sm text-emerald-100 mb-6">
-            মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা ও আলোচনার সুযোগ।
+
+          <p className="text-sm text-emerald-100 mb-6 leading-relaxed">
+            মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা এবং বিয়ানীবাজার ও গোলাপগঞ্জের
+            বিভিন্ন সমস্যা ও সমাধান নিয়ে আলোচনার সুযোগ পেতে অংশগ্রহণ করুন।
           </p>
 
           <div className="bg-white/90 text-gray-800 rounded-2xl p-6 space-y-3">
             <h2 className="font-semibold text-lg">🏅 অংশগ্রহণের নিয়মাবলী</h2>
-            <div className="bg-gray-100 p-3 rounded-xl">১। ফটো ফ্রেম ব্যবহার করুন</div>
-            <div className="bg-gray-100 p-3 rounded-xl">২। ফেসবুকে পোস্ট করুন</div>
-            <div className="bg-gray-100 p-3 rounded-xl">৩। দুইজন বন্ধুকে মেনশন</div>
-            <div className="bg-gray-100 p-3 rounded-xl">৪। ১০ জন বিজয়ী</div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ১। ফটো ফ্রেম ব্যবহার করে প্রোফাইল ছবি তৈরি করুন
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ২। ফেসবুকে পোস্ট করে <b>#selimuddinforsylhet6</b> ব্যবহার করুন
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ৩। অন্তত দুইজন বন্ধুকে মেনশন করুন
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ৪। ১০ জন বিজয়ী নির্বাচন করা হবে
+            </div>
           </div>
         </motion.div>
       </div>
