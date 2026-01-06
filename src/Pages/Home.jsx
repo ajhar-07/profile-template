@@ -71,7 +71,8 @@ const Home = () => {
 
   const handleDownload = async () => {
     if (!croppedImage) return;
-    toast.success("Profile Downloaded")
+    toast.success("Profile Downloaded");
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -81,11 +82,9 @@ const Home = () => {
     const userImg = await createImage(croppedImage);
     const templateImg = await createImage(temp);
 
-    // User image
     ctx.clearRect(0, 0, 1080, 1080);
     ctx.drawImage(userImg, 0, 0, 1080, 1080);
-    // Overlay template
-    ctx.drawImage(templateImg, -50, 692, 1200,400);
+    ctx.drawImage(templateImg, -50, 692, 1200, 400);
 
     const link = document.createElement("a");
     link.download = "facebook-profile.png";
@@ -99,8 +98,8 @@ const Home = () => {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-        {/* LEFT SIDE */}
-        <div className="space-y-6">
+        {/* LEFT SIDE (Upload + Hashtag) */}
+        <div className="space-y-6 order-2 lg:order-1">
 
           {/* Upload Card */}
           <div
@@ -133,7 +132,7 @@ const Home = () => {
                     onCropComplete={onCropComplete}
                   />
 
-                  <div className="absolute bottom-3 left-3 right-3 bg-white rounded-xl p-3">
+                  <div className="absolute z-1 bottom-3 left-3 right-3 bg-white rounded-xl p-3">
                     <input
                       type="range"
                       min={1}
@@ -157,14 +156,21 @@ const Home = () => {
                 <div className="relative w-full h-full">
                   <img
                     src={croppedImage}
-                    className="w-full h-full object-cover rounded-2xl"
+                    className="w-full h-full object-cover  rounded-2xl"
+                    alt=""
                   />
                   <img
                     src={temp}
-                    className="absolute mt-[165px] h-[240px] inset-0 w-full  rounded-2xl"
+                    className="absolute mt-[165px] h-[240px] inset-0 w-full rounded-2xl"
+                    alt=""
                   />
                 </div>
               )}
+              <img
+                    src={temp}
+                    className=" absolute mt-[165px] h-[240px] inset-0 w-full rounded-2xl"
+                    alt=""
+                  />
             </div>
 
             <input
@@ -178,31 +184,29 @@ const Home = () => {
 
           {/* Buttons */}
           {croppedImage && (
-            <div className="flex gap-3">
+            <div className="flex gap-3 ">
               <button
                 onClick={() => fileRef.current.click()}
-                className="flex-1 items-center flex justify-around bg-gray-200 rounded-xl py-2 font-medium"
+                className="flex-1 flex items-center justify-around bg-gray-200 rounded-xl py-2 font-medium"
               >
-              <FaRecycle/> <span>ফটো পরিবর্তন করুন</span>
+                <FaRecycle /> <span>ফটো পরিবর্তন করুন</span>
               </button>
               <button
                 onClick={handleDownload}
-                className="flex-1 items-center flex justify-around bg-emerald-600 text-white rounded-xl py-2 font-medium"
+                className="flex-1 flex items-center justify-around bg-emerald-600 text-white rounded-xl py-2 font-medium"
               >
-                <FaDownload/> <span>ডাউনলোড করুন</span>
+                <FaDownload /> <span>ডাউনলোড করুন</span>
               </button>
             </div>
           )}
 
-          {/* Info Card */}
+          {/* Hashtag Card */}
           <div className="bg-white/90 rounded-3xl p-6 shadow-lg">
             <h3 className="text-lg font-bold text-gray-800 mb-2">
               এলাকার উন্নয়নের অংশ হোন
             </h3>
-
-            <p className="text-sm text-gray-600 leading-relaxed mb-4">
+            <p className="text-sm text-gray-600 mb-4">
               বিয়ানীবাজার ও গোলাপগঞ্জের তরুণদের জন্য এটি একটি বিশেষ সুযোগ।
-              আপনার মেধা ও উদ্ভাবন দিয়ে গড়ে তুলুন আগামী দিনের সিলেট।
             </p>
 
             <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
@@ -212,49 +216,48 @@ const Home = () => {
               </span>
               <button
                 onClick={handleCopy}
-                className="ml-auto flex items-center text-emerald-500 hover:text-emerald-700 font-medium"
+                className="ml-auto flex items-center text-emerald-500 font-medium"
               >
-                <FaCopy/>  <span className="ml-1">Copy</span>
+                <FaCopy /> <span className="ml-1">Copy</span>
               </button>
             </div>
+            
           </div>
+           <p className="col-span-full text-center text-white">
+          © SoftEdge Technology Ltd.
+        </p>
         </div>
 
-        {/* RIGHT SIDE */}
-        <div className="text-white">
-          <h1 className="text-3xl font-bold mb-3">
-            আদম্য তরুণ প্রতিনিধি
-          </h1>
+        {/* RIGHT SIDE (Content) */}
+        <div className="text-white order-1 lg:order-2">
+          <h1 className="text-3xl font-bold mb-3">আদম্য তরুণ প্রতিনিধি</h1>
 
           <p className="text-sm text-emerald-100 mb-6 leading-relaxed">
             মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা এবং বিয়ানীবাজার ও গোলাপগঞ্জের
             বিভিন্ন সমস্যা ও সমাধান নিয়ে আলোচনার সুযোগ পেতে অংশগ্রহণ করুন।
           </p>
-
-          <div className="bg-white/90 text-gray-800 rounded-2xl p-6 space-y-4">
+          
+          <div className="bg-white/90 text-gray-800 rounded-2xl p-6 space-y-3">
             <h2 className="font-semibold text-lg">🏅 অংশগ্রহণের নিয়মাবলী</h2>
-            <div className="space-y-3 text-sm">
-              <div className="bg-gray-100 p-3 rounded-xl">
-                ১। ফটো ফ্রেম ব্যবহার করে প্রোফাইল ছবি তৈরি করুন
-              </div>
-              <div className="bg-gray-100 p-3 rounded-xl">
-                ২। ফেসবুকে পোস্ট করে <span className="text-green-600 font-semibold">#selimuddinforsylhet6</span> ব্যবহার করুন
-              </div>
-              <div className="bg-gray-100 p-3 rounded-xl">
-                ৩। অন্তত দুইজন বন্ধুকে মেনশন করুন
-              </div>
-              <div className="bg-gray-100 p-3 rounded-xl">
-                ৪। ১০ জন বিজয়ী নির্বাচন করা হবে
-              </div>
-              
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ১। ফটো ফ্রেম ব্যবহার করে প্রোফাইল ছবি তৈরি করুন
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ২। ফেসবুকে পোস্ট করে <b>#selimuddinforsylhet6</b> ব্যবহার করুন
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ৩। অন্তত দুইজন বন্ধুকে মেনশন করুন
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ৪। ১০ জন বিজয়ী নির্বাচন করা হবে
             </div>
           </div>
-
         </div>
-          <p className=" text-white">© SoftEdge Technology Ltd.</p>
+
+       
       </div>
-      
-       <Toaster />
+
+      <Toaster />
     </div>
   );
 };
