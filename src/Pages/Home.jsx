@@ -1,9 +1,16 @@
 import React, { useRef, useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
+import { motion } from "framer-motion";
 import temp from "../assets/temp.png";
 import toast, { Toaster } from "react-hot-toast";
-import { FaCopy, FaDownload, FaRecycle, FaUpload } from "react-icons/fa";
+import {
+  FaCopy,
+  FaDownload,
+  FaRecycle,
+  FaUpload,
+} from "react-icons/fa";
 
+/* ------------------ Helpers ------------------ */
 const createImage = (url) =>
   new Promise((resolve, reject) => {
     const img = new Image();
@@ -35,6 +42,18 @@ const getCroppedImage = async (imageSrc, cropPixels) => {
   return canvas.toDataURL("image/png");
 };
 
+/* ------------------ Animations ------------------ */
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+/* ------------------ Component ------------------ */
 const Home = () => {
   const hashtagText = "#selimuddinforsylhet6 চ্যালেঞ্জে অংশ নিন ...";
 
@@ -71,6 +90,7 @@ const Home = () => {
 
   const handleDownload = async () => {
     if (!croppedImage) return;
+
     toast.success("Profile Downloaded");
 
     const canvas = canvasRef.current;
@@ -93,32 +113,48 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-700 flex items-center justify-center px-1 py-6">
+    <motion.div
+      variants={fadeIn}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-700 flex items-center justify-center px-1 py-6"
+    >
       <canvas ref={canvasRef} className="hidden" />
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-        {/* LEFT SIDE (Upload + Hashtag) */}
+        {/* LEFT SIDE */}
         <div className="space-y-6 order-2 lg:order-1">
 
           {/* Upload Card */}
-          <div
+          <motion.div
+            variants={fadeUp}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.02 }}
             onClick={() => !imageSrc && fileRef.current.click()}
             className="bg-white rounded-3xl p-8 shadow-xl cursor-pointer"
           >
             <div className="w-full h-96 border-2 border-dashed border-emerald-300 rounded-2xl relative overflow-hidden">
 
               {!imageSrc && (
-                <div className="flex flex-col items-center justify-center h-full text-center">
-                    <p className="font-medium">আপনার ছবি আপলোড করুন</p>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex flex-col items-center justify-center h-full text-center"
+                >
+                  <p className="font-medium">আপনার ছবি আপলোড করুন</p>
                   <p className="text-sm text-gray-500 mb-2">
                     PNG, JPG or JPEG (Max 10MB)
                   </p>
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-                    <span className="text-emerald-600 text-3xl"><FaUpload/></span>
-                  </div>
-                
-                </div>
+                  <motion.div
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center"
+                  >
+                    <FaUpload className="text-emerald-600 text-3xl" />
+                  </motion.div>
+                </motion.div>
               )}
 
               {imageSrc && !croppedImage && (
@@ -133,7 +169,7 @@ const Home = () => {
                     onCropComplete={onCropComplete}
                   />
 
-                  <div className="absolute z-1 bottom-3 left-3 right-3 bg-white rounded-xl p-3">
+                  <div className="absolute bottom-3 left-3 right-3 bg-white rounded-xl p-3">
                     <input
                       type="range"
                       min={1}
@@ -154,10 +190,15 @@ const Home = () => {
               )}
 
               {croppedImage && (
-                <div className="relative w-full h-full">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full h-full"
+                >
                   <img
                     src={croppedImage}
-                    className="w-full h-full object-cover  rounded-2xl"
+                    className="w-full h-full object-cover rounded-2xl"
                     alt=""
                   />
                   <img
@@ -165,13 +206,14 @@ const Home = () => {
                     className="absolute mt-[165px] h-[240px] inset-0 w-full rounded-2xl"
                     alt=""
                   />
-                </div>
+                </motion.div>
               )}
+
               <img
-                    src={temp}
-                    className=" absolute mt-[165px] h-[240px] inset-0 w-full rounded-2xl"
-                    alt=""
-                  />
+                src={temp}
+                className="absolute mt-[165px] h-[240px] inset-0 w-full rounded-2xl pointer-events-none"
+                alt=""
+              />
             </div>
 
             <input
@@ -181,35 +223,40 @@ const Home = () => {
               onChange={onSelectFile}
               className="hidden"
             />
-          </div>
+          </motion.div>
 
           {/* Buttons */}
           {croppedImage && (
-            <div className="flex gap-3 ">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="flex gap-3"
+            >
               <button
                 onClick={() => fileRef.current.click()}
                 className="flex-1 flex items-center justify-around bg-gray-200 rounded-xl py-2 font-medium"
               >
-                <FaRecycle /> <span>ফটো পরিবর্তন করুন</span>
+                <FaRecycle /> ফটো পরিবর্তন করুন
               </button>
               <button
                 onClick={handleDownload}
                 className="flex-1 flex items-center justify-around bg-emerald-600 text-white rounded-xl py-2 font-medium"
               >
-                <FaDownload /> <span>ডাউনলোড করুন</span>
+                <FaDownload /> ডাউনলোড করুন
               </button>
-            </div>
+            </motion.div>
           )}
 
-          {/* Hashtag Card */}
-          <div className="bg-white/90 rounded-3xl p-6 shadow-lg">
+          {/* Hashtag */}
+          <motion.div
+            variants={fadeUp}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white/90 rounded-3xl p-6 shadow-lg"
+          >
             <h3 className="text-lg font-bold text-gray-800 mb-2">
               এলাকার উন্নয়নের অংশ হোন
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              বিয়ানীবাজার ও গোলাপগঞ্জের তরুণদের জন্য এটি একটি বিশেষ সুযোগ।
-            </p>
-
             <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
               <span className="text-emerald-500 font-bold">#</span>
               <span className="text-emerald-600 text-sm font-medium truncate">
@@ -219,47 +266,41 @@ const Home = () => {
                 onClick={handleCopy}
                 className="ml-auto flex items-center text-emerald-500 font-medium"
               >
-                <FaCopy /> <span className="ml-1">Copy</span>
+                <FaCopy className="mr-1" /> Copy
               </button>
             </div>
-            
-          </div>
-           <p className="col-span-full text-center text-white">
-          © SoftEdge Technology Ltd.
-        </p>
+          </motion.div>
+
+          <p className="text-center text-white">
+            © SoftEdge Technology Ltd.
+          </p>
         </div>
 
-        {/* RIGHT SIDE (Content) */}
-        <div className="text-white order-1 lg:order-2">
+        {/* RIGHT SIDE */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-white order-1 lg:order-2"
+        >
           <h1 className="text-3xl font-bold mb-3">আদম্য তরুণ প্রতিনিধি</h1>
-
-          <p className="text-sm text-emerald-100 mb-6 leading-relaxed">
-            মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা এবং বিয়ানীবাজার ও গোলাপগঞ্জের
-            বিভিন্ন সমস্যা ও সমাধান নিয়ে আলোচনার সুযোগ পেতে অংশগ্রহণ করুন।
+          <p className="text-sm text-emerald-100 mb-6">
+            মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা ও আলোচনার সুযোগ।
           </p>
-          
+
           <div className="bg-white/90 text-gray-800 rounded-2xl p-6 space-y-3">
             <h2 className="font-semibold text-lg">🏅 অংশগ্রহণের নিয়মাবলী</h2>
-            <div className="bg-gray-100 p-3 rounded-xl">
-              ১। ফটো ফ্রেম ব্যবহার করে প্রোফাইল ছবি তৈরি করুন
-            </div>
-            <div className="bg-gray-100 p-3 rounded-xl">
-              ২। ফেসবুকে পোস্ট করে <b>#selimuddinforsylhet6</b> ব্যবহার করুন
-            </div>
-            <div className="bg-gray-100 p-3 rounded-xl">
-              ৩। অন্তত দুইজন বন্ধুকে মেনশন করুন
-            </div>
-            <div className="bg-gray-100 p-3 rounded-xl">
-              ৪। ১০ জন বিজয়ী নির্বাচন করা হবে
-            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">১। ফটো ফ্রেম ব্যবহার করুন</div>
+            <div className="bg-gray-100 p-3 rounded-xl">২। ফেসবুকে পোস্ট করুন</div>
+            <div className="bg-gray-100 p-3 rounded-xl">৩। দুইজন বন্ধুকে মেনশন</div>
+            <div className="bg-gray-100 p-3 rounded-xl">৪। ১০ জন বিজয়ী</div>
           </div>
-        </div>
-
-       
+        </motion.div>
       </div>
 
       <Toaster />
-    </div>
+    </motion.div>
   );
 };
 
