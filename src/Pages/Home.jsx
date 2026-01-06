@@ -165,7 +165,7 @@ const Home = () => {
                     onCropComplete={onCropComplete}
                   />
 
-                  <div className="absolute bottom-3 left-3 right-3 bg-white rounded-xl p-3">
+                  <div className="absolute z-1 bottom-3 left-3 right-3 bg-white rounded-xl p-3">
                     <input
                       type="range"
                       min={1}
