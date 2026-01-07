@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import { motion } from "framer-motion";
-import temp from "../assets/temp.png";
+import temp from "../assets/tempDesign.png";
 import toast, { Toaster } from "react-hot-toast";
 import { FaCopy, FaDownload, FaRecycle, FaUpload } from "react-icons/fa";
 
@@ -99,13 +99,27 @@ const Home = () => {
 
     ctx.clearRect(0, 0, 1080, 1080);
     ctx.drawImage(userImg, 0, 0, 1080, 1080);
-    ctx.drawImage(templateImg, -50, 692, 1200, 400);
+    ctx.drawImage(templateImg, 0, 580, 1080, 500);
 
     const link = document.createElement("a");
     link.download = "facebook-profile.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   };
+
+const handleChangePhoto = () => {
+  setImageSrc(null);
+  setCroppedImage(null);
+  setCrop({ x: 0, y: 0 });
+  setZoom(1);
+  setCropPixels(null);
+
+  // file input আবার open করবে
+  setTimeout(() => {
+    fileRef.current.click();
+  }, 0);
+};
+
 
   return (
     <motion.div
@@ -207,7 +221,7 @@ const Home = () => {
 
               <img
                 src={temp}
-                className="absolute mt-[165px] h-[240px] inset-0 w-full rounded-2xl pointer-events-none"
+                className="absolute mt-[140px] h-[240px] inset-0 w-full rounded-2xl pointer-events-none"
                 alt=""
               />
             </div>
@@ -229,12 +243,34 @@ const Home = () => {
               transition={{ duration: 0.4 }}
               className="flex gap-3"
             >
-              <button className="flex-1 flex items-center justify-around bg-gray-200 rounded-xl py-2 font-medium">
-                <FaRecycle /> ফটো পরিবর্তন করুন
-              </button>
+             <button
+  onClick={handleChangePhoto}
+  className="flex-1 flex items-center justify-center gap-2
+bg-white/80 backdrop-blur
+border border-emerald-300
+text-emerald-700 font-semibold
+py-2.5 px-4 rounded-xl
+shadow-md
+hover:bg-emerald-50
+hover:border-emerald-400
+hover:shadow-lg
+active:scale-95
+transition-all duration-300"
+>
+  <FaRecycle /> ফটো পরিবর্তন করুন
+</button>
+
               <button
                 onClick={handleDownload}
-                className="flex-1 flex items-center justify-around bg-emerald-600 text-white rounded-xl py-2 font-medium"
+                className="flex-1 flex items-center justify-center gap-2
+bg-gradient-to-r from-emerald-500 to-teal-600
+text-white font-semibold
+py-2.5 px-4 rounded-xl
+shadow-lg shadow-emerald-500/30
+hover:from-emerald-600 hover:to-teal-700
+hover:shadow-xl hover:shadow-emerald-600/40
+active:scale-95
+transition-all duration-300"
               >
                 <FaDownload /> ডাউনলোড করুন
               </button>
