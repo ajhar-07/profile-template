@@ -317,7 +317,7 @@ transition-all duration-300"
         >
           <h1 className="text-3xl font-bold mb-3">আদম্য তরুণ প্রতিনিধি</h1>
 
-          <p className="text-sm text-emerald-100 mb-6 leading-relaxed">
+          <p className="text-lg text-emerald-100 mb-6 leading-relaxed">
             মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা এবং বিয়ানীবাজার ও গোলাপগঞ্জের
             বিভিন্ন সমস্যা ও সমাধান নিয়ে আলোচনার সুযোগ পেতে অংশগ্রহণ করুন।
           </p>
