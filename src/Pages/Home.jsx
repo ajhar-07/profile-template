@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import { motion } from "framer-motion";
-import temp from "../assets/tempDesign.png";
+import temp from "../assets/tempDesign1.png";
 import toast, { Toaster } from "react-hot-toast";
 import { FaCopy, FaDownload, FaRecycle, FaUpload } from "react-icons/fa";
 
@@ -287,7 +287,7 @@ transition-all duration-300"
               এলাকার উন্নয়নের অংশ হোন
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              বিয়ানীবাজার ও গোলাপগঞ্জের তরুণদের জন্য এটি একটি বিশেষ সুযোগ।
+              গোলাপগঞ্জ-বিয়ানীবাজারের তরুণদের জন্য এটি একটি বিশেষ সুযোগ।
             </p>
 
             <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
@@ -318,7 +318,7 @@ transition-all duration-300"
           <h1 className="text-3xl font-bold mb-3">আদম্য তরুণ প্রতিনিধি</h1>
 
           <p className="text-lg text-emerald-100 mb-6 leading-relaxed">
-            মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা এবং বিয়ানীবাজার ও গোলাপগঞ্জের
+            মোহাম্মদ সেলিম উদ্দিন এর সাথে কফি আড্ডা এবং গোলাপগঞ্জ-বিয়ানীবাজারের
             বিভিন্ন সমস্যা ও সমাধান নিয়ে আলোচনার সুযোগ পেতে অংশগ্রহণ করুন।
           </p>
 
