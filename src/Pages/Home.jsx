@@ -334,7 +334,10 @@ transition-all duration-300"
               ৩। অন্তত দুইজন বন্ধুকে মেনশন করুন
             </div>
             <div className="bg-gray-100 p-3 rounded-xl">
-              ৪। ১০ জন বিজয়ী নির্বাচন করা হবে
+              ৪। প্রবাসীরাও এই ক্যাম্পেইনে অংশগ্রহণ করতে পারবেন।
+            </div>
+            <div className="bg-gray-100 p-3 rounded-xl">
+              ৫। ৩০ জন বিজয়ী নির্বাচন করা হবে
             </div>
           </div>
         </motion.div>
