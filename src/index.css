@@ -1,10 +1,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap');
 
 body {
-  font-family: "Tiro Bangla", serif;
-  font-weight: 500;
+  font-family: 'Hind Siliguri', sans-serif;
+} */
+
+
+@font-face {
+  font-family: 'Sharif Osman Hadi';
+  src: url('./assets/Hadi\ \(Rounded\).ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
+}
+body {
+  font-family: 'Sharif Osman Hadi', 'Hind Siliguri', sans-serif;
 }
